@@ -1,5 +1,5 @@
-{
-  "name": "prumo-windows-client",
+﻿{
+  "name": "promo-app-windows-client",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -8,7 +8,7 @@
     "email": "noreply@prumo.app"
   },
   "main": "electron/main.cjs",
-  "description": "Windows client app (desktop web shell)",
+  "description": "Windows desktop app shell (embedded web)",
   "engines": {
     "node": ">=20"
   },
@@ -21,8 +21,7 @@
     "sync:web:dist": "node scripts/sync-web-dist.mjs",
     "desktop:prepare:web": "npm run build:web:embedded && npm run sync:web:dist",
     "desktop:dev": "concurrently -k \"node scripts/run-web-dev.mjs\" \"wait-on tcp:8080 && electron .\"",
-    "desktop:build:win": "npm run desktop:prepare:web && electron-builder --win nsis --publish never",
-    "desktop:build:linux": "npm run desktop:prepare:web && electron-builder --linux AppImage deb --publish never"
+    "desktop:build:win": "npm run desktop:prepare:web && electron-builder --win nsis --publish never"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.98.0",
@@ -42,7 +41,7 @@
   },
   "build": {
     "appId": "com.prumo.windows.client",
-    "productName": "Prumo Desktop Client",
+    "productName": "Promo App Windows",
     "directories": {
       "output": "release"
     },
@@ -60,17 +59,8 @@
       "target": [
         "nsis"
       ],
-      "artifactName": "Prumo-Windows-Client-${version}-Setup.${ext}",
+      "artifactName": "Promo_APP_Windows-${version}-Setup.${ext}",
       "signAndEditExecutable": false
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ],
-      "artifactName": "Prumo-Linux-Client-${version}-${arch}.${ext}",
-      "category": "Utility",
-      "maintainer": "Prumo Team <noreply@prumo.app>"
     },
     "nsis": {
       "oneClick": false,
@@ -78,3 +68,4 @@
     }
   }
 }
+
