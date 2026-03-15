@@ -28,6 +28,17 @@ jobs:
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            promo_APP_Web/package-lock.json
+
+      - name: Validate required env
+        shell: bash
+        run: |
+          if [ -z "$VITE_SUPABASE_URL" ] || [ -z "$VITE_SUPABASE_PUBLISHABLE_KEY" ]; then
+            echo "Missing VITE_SUPABASE_URL or VITE_SUPABASE_PUBLISHABLE_KEY"
+            exit 1
+          fi
 
       - name: Install dependencies
         run: npm ci
@@ -35,6 +46,22 @@ jobs:
       - name: Install web dependencies
         run: npm --prefix ./promo_APP_Web ci
 
+      - name: Lint desktop shell
+        run: npm run lint
+
+      - name: Build desktop web shell
+        run: npm run build
+
       - name: Prepare embedded web bundle
         run: npm run desktop:prepare:web
 
+      - name: Package Windows installer
+        run: npm run desktop:build:win
+
+      - name: Upload CI installer artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: promo_APP_Windows-ci-installer
+          path: release/*.exe
+          if-no-files-found: warn

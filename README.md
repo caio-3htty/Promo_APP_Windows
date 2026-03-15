@@ -35,4 +35,10 @@ Build embutido do web usa as variaveis do `promo_APP_Web`:
 - `desktop-ci`: valida preparacao do bundle web embutido em Windows.
 - `desktop-release`: gera `.exe` e publica artefato.
 
+## Code Hygiene
+```bash
+npm run cleanup:analyze
+npm run cleanup:verify
+```
+
 # Promo_APP_Windows
