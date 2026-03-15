@@ -1,10 +1,10 @@
-# Prumo Desktop Client
+# Promo App Windows
 
-Shell Electron para Windows/Linux que carrega o `prumo-web-client`.
+Shell Electron dedicado ao Windows que carrega o `promo_APP_Web`.
 
 ## Stack
 - Electron
-- Build embutido do `../prumo-web-client`
+- Build embutido do `../promo_APP_Web`
 
 ## Requisitos
 - Node.js 20+
@@ -16,29 +16,29 @@ npm install
 npm run desktop:dev
 ```
 
-Por padrao os scripts procuram o repo web em `../prumo-web-client`.
-Se estiver em outro caminho, defina `PRUMO_WEB_CLIENT_DIR`.
+Por padrao os scripts procuram o repo web em `../promo_APP_Web`.
+Se estiver em outro caminho, defina `PROMO_APP_WEB_DIR`.
 
 ## Gerar instalador Windows (.exe)
 ```bash
 npm run desktop:build:win
 ```
 
-## Gerar pacote Linux (.AppImage + .deb)
-```bash
-npm run desktop:build:linux
-```
-
-Em Windows, a geracao de `.AppImage` pode exigir privilegio de symlink (ou Developer Mode ativo). O caminho recomendado e executar esse build em runner Linux (workflow `desktop-release`).
 Artefatos em `release/`.
 
 ## Variaveis de ambiente
-Build embutido do web usa as variaveis do `prumo-web-client`:
+Build embutido do web usa as variaveis do `promo_APP_Web`:
 - `VITE_SUPABASE_URL`
 - `VITE_SUPABASE_PUBLISHABLE_KEY`
 
 ## GitHub Actions
-- `desktop-ci`: valida preparacao do bundle web embutido em Windows e Linux.
-- `desktop-release`: gera `.exe`, `.AppImage` e `.deb` e publica artefatos.
+- `desktop-ci`: valida preparacao do bundle web embutido em Windows.
+- `desktop-release`: gera `.exe` e publica artefato.
+
+## Code Hygiene
+```bash
+npm run cleanup:analyze
+npm run cleanup:verify
+```
 
 # Promo_APP_Windows
